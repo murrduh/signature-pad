@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-visual">
+<meta name="theme-color" content="#123460">
+<title>AGD Signature Log</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>AGD Signature Log</h1>
+  <span id="fileName" class="file-name">No log open</span>
+  <div class="topbar-actions">
+    <label class="btn btn-primary" for="fileInput">Open log</label>
+    <input id="fileInput" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+    <button id="printBtn" class="btn" disabled>Print view</button>
+    <button id="saveBtn" class="btn btn-accent" disabled>Save workbook</button>
+  </div>
+</header>
+
+<main id="main">
+  <p id="emptyState" class="empty">Tap <b>Open log</b> and pick the maintenance log (.xlsx) from Downloads, Drive or OneDrive.</p>
+  <table id="rowsTable" class="rows" hidden>
+    <thead>
+      <tr><th>Count</th><th>Serial</th><th>Make</th><th>Model</th><th>Staff Name</th><th>Technician</th><th>Staff</th><th>Sign</th></tr>
+    </thead>
+    <tbody id="rowsBody"></tbody>
+  </table>
+</main>
+
+<!-- Signature pad -->
+<section id="pad" class="pad" hidden aria-modal="true" role="dialog">
+  <div class="pad-bar" id="padBar">
+    <div class="pad-title" id="padTitle"></div>
+    <label class="pad-name">
+      <span id="padNameLabel">Printed name</span>
+      <input id="padName" type="text" autocomplete="off" autocapitalize="words" enterkeyhint="done">
+    </label>
+    <button id="padClear" class="btn">Clear</button>
+    <button id="padUndo" class="btn">Undo stroke</button>
+    <button id="padCancel" class="btn">Cancel</button>
+    <button id="padAccept" class="btn btn-accent">Accept</button>
+  </div>
+  <div class="pad-msg" id="padMsg" role="alert"></div>
+  <div class="pad-area" id="padArea">
+    <canvas id="padCanvas"></canvas>
+    <div class="pad-guide">Sign above the line</div>
+  </div>
+</section>
+
+<!-- Save dialog -->
+<section id="saveDlg" class="dlg" hidden role="dialog" aria-modal="true">
+  <div class="dlg-box">
+    <h2>Workbook ready</h2>
+    <p id="saveName" class="mono"></p>
+    <p class="hint">Your original file is not changed.</p>
+    <div class="dlg-actions">
+      <button id="shareBtn" class="btn btn-primary" hidden>Share…</button>
+      <button id="downloadBtn" class="btn btn-accent">Download</button>
+      <button id="saveClose" class="btn">Close</button>
+    </div>
+    <p id="saveStatus" class="hint" role="status"></p>
+  </div>
+</section>
+
+<!-- Print view -->
+<section id="printView" class="print-view" hidden>
+  <div class="print-bar no-print">
+    <button id="printNow" class="btn btn-primary">Print / Save as PDF</button>
+    <button id="printClose" class="btn">Close</button>
+  </div>
+  <div id="printContent"></div>
+</section>
+
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script src="vendor/jszip-3.10.1.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Publish only the app. Workbooks, PDFs and test output hold staff data.
+*
+!.gitignore
+!.nojekyll
+!index.html
+!app.js
+!styles.css
+!sw.js
+!manifest.webmanifest
+!README.txt
+!icons/
+!icons/*.png
+!vendor/
+!vendor/*
